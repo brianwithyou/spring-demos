@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: minio-demo
+minio:
+  config:
+    bucket-name: ${spring.application.name}
+#    bucket-name: doc
+    access-key: 625F8h0HtyQ3TW3p
+    secret-key: MThVkV5JPDdBFVbbhIjfDlhb6btYRyvT
+    object-prefix: http://localhost:8080/doc
+    classifications:
+      - api/remark

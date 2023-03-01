@@ -1,0 +1,2 @@
+# spring 2.7????
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.example.minio.config.MinioAutoConfig
