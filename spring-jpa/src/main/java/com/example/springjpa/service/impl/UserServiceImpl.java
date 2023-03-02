@@ -5,14 +5,12 @@ import cn.hutool.core.util.StrUtil;
 import com.example.springcommon.common.PageResult;
 import com.example.springjpa.convert.UserConvert;
 import com.example.springjpa.entity.User;
+import com.example.springjpa.entity.UserDetail;
 import com.example.springjpa.repository.UserRepository;
 import com.example.springjpa.service.UserService;
 import com.example.springjpa.vo.request.UserPageRequest;
 import com.example.springjpa.vo.response.UserPageResponse;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -91,5 +89,32 @@ public class UserServiceImpl implements UserService {
         });
         return pageResult;
     }
+
+    @Override
+    public PageResult<UserPageResponse> listByExample() {
+        User user = User.builder().username("abc").area("北京").password("password").build();
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                // 模糊查询匹配开头，即{username}%
+                .withMatcher("username", ExampleMatcher.GenericPropertyMatchers.startsWith())
+                // 全部模糊查询，即%{address}%
+                .withMatcher("area" ,ExampleMatcher.GenericPropertyMatchers.contains())
+                // 忽略字段，即不管password是什么值都不加入查询条件
+                .withIgnorePaths("password");
+
+        Example<User> example = Example.of(user, matcher);
+        userRepository.findAll(example);
+        return null;
+    }
+
+    @Override
+    public UserDetail getDetail(Long id) {
+        return userRepository.getDetail(id);
+    }
+
+    @Override
+    public int updateSql(String nickname, Long id) {
+        return userRepository.updateSql(nickname, id);
+    }
+
 
 }
