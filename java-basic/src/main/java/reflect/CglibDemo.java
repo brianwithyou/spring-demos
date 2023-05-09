@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 public class CglibDemo {
 
     public void cglibProxyDemo() {
+
         CglibUser cglibUser = new CglibUser("Stark");
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(cglibUser.getClass());
