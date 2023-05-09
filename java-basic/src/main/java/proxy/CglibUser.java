@@ -1,19 +1,18 @@
-package reflect;
+package proxy;
 
 /**
  * @author brian
  */
-public class User implements UserInterface {
+public class CglibUser {
 
     private String name;
 
     private Integer age;
 
-    public User(String name) {
+    public CglibUser(String name) {
         this.name = name;
     }
 
-    @Override
     public void sayHello() {
         System.out.println("hello, I'm " + this.name);
     }

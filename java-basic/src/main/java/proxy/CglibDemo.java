@@ -1,4 +1,4 @@
-package reflect;
+package proxy;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
